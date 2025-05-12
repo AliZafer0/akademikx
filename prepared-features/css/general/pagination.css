@@ -1,0 +1,38 @@
+/*PAGINATION*/
+.page-link {
+    color: #BEC0C5;
+    background-color: transparent;
+    margin: 10px;
+    border: 1px solid #313746;
+    border-radius: 10px !important;
+}
+
+.page-link:active {
+    background-color: transparent;
+}
+
+.page-link:focus {
+    background-color: transparent;
+    outline: none;
+    color: #BEC0C5;
+    box-shadow: none !important;
+    background-color: #212326; /* Arka plan değişir */
+    color: #fff; /* Yazı rengi değişir */
+}
+
+
+/* Aktif sayfa için renk ayarları */
+.pagination .active .page-link {
+    background-color: #26BF9433; 
+    border: 1px solid #26BF9433;
+}
+
+.pagination .active .page-link:focus {
+    background-color: #e6533c1a; 
+    border: 1px solid #E6533C;
+}
+
+.pagination .page-item:hover .page-link {
+    background-color: #8E54E91A;
+    color: white; 
+}

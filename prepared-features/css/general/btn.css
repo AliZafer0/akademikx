@@ -1,0 +1,123 @@
+.header-yesil-btn,
+.header-mor-btn {
+    border-radius: 5px;
+    padding: 7px 12px 7px 12px;
+}
+
+.header-yesil-btn {
+    color: var(--yesil); 
+    background-color: var(--yesil-bg);
+}
+
+.header-mor-btn {
+    background-color: var(--mor-bg);
+    color: var(--mor);
+}
+
+.header-yesil-btn:hover {
+    color: var(--beyaz);
+    background-color: var(--yesil-hover);
+}
+
+.header-mor-btn:hover {
+    background-color: var(--mor-hover);
+    color: var(--beyaz);
+}
+
+a.btn:focus {
+  outline: none; 
+  background-color: var(--tikli-siyah); 
+  color: var(--beyaz);
+}
+
+
+.morumsu-btn,
+.yesil-btn,
+.mavi-btn,
+.kirmizi-btn{
+    border-radius: 50%;
+    padding: 12px;
+    font-size: 0.7em;
+    margin-right: 3px;
+}
+
+.morumsu-btn {
+    color: var(--morumsu);
+    background-color: var(--morumsu-bg); 
+}
+
+.morumsu-btn:hover {
+    color: var(--beyaz);
+    background-color: var(--morumsu-hover);
+}
+
+.morumsu-btn:focus {
+    color: #B8B8B8;
+    /*background-color: #F0F0F0;*/
+}
+
+.yesil-btn {
+    color: var(--yesil); 
+    background-color: var(--yesil-bg);
+}
+
+.yesil-btn:hover {
+    color: var(--beyaz);
+    background-color: var(--yesil-hover);
+}
+
+.yesil-btn:focus {
+    color: var(--beyaz);
+    /*background-color: #26BF94;*/
+}
+
+.mavi-btn {
+    color: var(--mavi);
+    background-color: var(--mavi-bg); 
+}
+
+.mavi-btn:hover {
+    color: var(--beyaz);
+    background-color: var(--mavi-hover);
+}
+
+.mavi-btn:focus {
+    color: var(--beyaz);
+    /*background-color: #49B6F5;*/
+}
+
+.kirmizi-btn {
+    color: var(--kirmizi);
+    background-color: var(--kirmizi-bg); 
+}
+
+.kirmizi-btn:hover {
+    color: var(--beyaz);
+    background-color: var(--kirmizi-hover);
+}
+
+.kirmizi-btn:focus {
+    color: var(--beyaz);
+    /*background-color: #e6533c1a;*/
+} 
+
+.bottom-mor-btn {
+    color: #fff; 
+    background-color: #8E54E9;    
+}
+.bottom-mor-btn:hover {
+    background-color: #8450D8;
+    border: 1px solid #8E54E9;
+    color: #fff; 
+}
+
+.bottom-kirmizi-btn {
+    color: #fff; 
+    background-color: #E6533C;    
+}
+.bottom-kirmizi-btn:hover {
+    background-color: #c93e28;
+    border: 1px solid #E6533C;
+    color: #fff; 
+}
+
