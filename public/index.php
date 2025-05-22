@@ -80,6 +80,8 @@ $router->add('GET','/api/admin/get-categories','AdminController','getCategoriesA
 $router->add('POST','/api/admin/add-lesson','AdminController','addLessonApi');
 $router->add('POST','/api/admin/add-category','AdminController','addCategoryApi');
 $router->add('POST','/api/admin/add-teacher','AdminController','addTeacherApi');
+$router->add('GET','/api/admin/get-user','AdminController','getUsersApi');
+$router->add('GET','/api/admin/dell-user/{id}','AdminController','DelUserApi');
 
 // -----------------------
 // Dispatcher

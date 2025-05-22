@@ -90,24 +90,28 @@ Class Users
         return $exitsUser['count'] > 0;
     }
     public function hasRole(string $role, int $id): bool
-    {
-        $sql = "SELECT role FROM users WHERE id = :id LIMIT 1";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
+{
+    $sql = "SELECT role FROM users WHERE id = :id LIMIT 1";
+    $stmt = $this->db->prepare($sql);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+    $stmt->execute();
 
-        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-       if($role === $user)
-       {
+    if ($user && $user['role'] === $role) {
         return true;
-       }
-       else
-       {
-        return false;
-       }
     }
 
+    return false;
+}
+
+    public function DelUserById($id)
+    {
+        $sql = "DELETE FROM users WHERE id = :id";
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id',$id,PDO::PARAM_INT);
+        return $stmt->execute();
+    } 
 }
 // 🧪 Test amaçlı çalıştırma (yalnızca direkt bu dosya açılırsa çalışsın)
 if (basename(__FILE__) == basename($_SERVER["SCRIPT_FILENAME"])) {

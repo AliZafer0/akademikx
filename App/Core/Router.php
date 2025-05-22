@@ -37,6 +37,7 @@ class Router
         }
 
         http_response_code(404);
-        echo "404 Sayfa Bulunamadı";
+        require_once __DIR__ . '/../Views/Error/404.php';
+        exit; // Hata sayfasından sonra script devam etmesin diye
     }
 }

@@ -23,6 +23,14 @@ class AdminController {
         $this->Auth = new Auth();
         $this->Admin = new AdminModel();
         $this->Users = new Users();
+
+        $this->Auth->isLogin();
+
+        if (!$this->Users->hasRole('admin', $_SESSION['user_id'])) {
+            require_once __DIR__ . '/../Views/Error/401.php';
+            exit; // Hata sayfasından sonra script devam etmesin diye
+        }
+
     }
    
     public function adminIndex()
@@ -165,6 +173,25 @@ class AdminController {
 
             
         }
-            
+        
+        public function getUsersApi()
+        {
+             header('Content-Type: application/json');
+            echo json_encode($this->Users->getUsers());
+        }
+
+        public function DelUserApi($id)
+        {
+           if(DelUserById($id))
+           {
+                header('Location: ' . $_SERVER['HTTP_REFERER'] . '?succsess');
+                exit;
+           }
+           else{
+                    header('Location: ' . $_SERVER['HTTP_REFERER'] . '?error');
+                    exit;
+                }
+        }
+        
 
 }

@@ -53,7 +53,7 @@
     </div>
     <ul class="list-unstyled">
       <li class="mb-2">
-        <a href="/akademikx/public/admin/" class="d-block text-decoration-none py-2 px-3 rounded <?php if($current_page == 'admin') echo 'bg-dark'; ?>">  
+        <a href="/akademikx/public/admin" class="d-block text-decoration-none py-2 px-3 rounded <?php if($current_page == 'admin') echo 'bg-dark'; ?>">  
           <i class="fa-solid fa-sitemap me-2"></i>Ana Sayfa
         </a>
       </li>
@@ -101,7 +101,7 @@
               <button class="btn me-2" id="toggleSidebar" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenuus" aria-controls="offcanvasMenu">
                 <i class="fa-solid fa-bars"></i>
               </button>
-              <a class="btn" href="/akademikx/public/admin/">
+              <a class="btn" href="/akademikx/public/admin">
                   <i class="fa-solid fa-house"></i>
               </a>
             </div>

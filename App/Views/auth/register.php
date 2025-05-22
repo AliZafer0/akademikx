@@ -26,7 +26,7 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">Şifre</label>
-        <input type="password" class="form-control" id="password" name="password" required minlength="6">
+        <input type="password" class="form-control" id="password" name="password" required minlength="1">
       </div>
       <button type="submit" class="btn btn-primary w-100">Kayıt Ol</button>
     </form>

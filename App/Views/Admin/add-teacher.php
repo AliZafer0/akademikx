@@ -132,7 +132,7 @@
   </script>
 
   <!-- ✅ Modal Gösterme ve Kopyalama Fonksiyonu -->
-  <?php if ($showModal): ?>
+  <?php if ($_GET['showModal']): ?>
   <script>
     window.addEventListener("DOMContentLoaded", function () {
       var successModal = new bootstrap.Modal(document.getElementById('successModal'));
