@@ -1,2 +1,0 @@
-# akademikx
-akademikx
