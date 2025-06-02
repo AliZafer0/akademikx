@@ -1,3 +1,4 @@
+<?php use App\Helpers\CourseHelper; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,8 +29,8 @@
 
     </div>
 <script>
-   document.addEventListener('DOMContentLoaded', () => {
-    fetch('/akademikx/public/courses-json')
+document.addEventListener('DOMContentLoaded', () => {
+  fetch('/akademikx/public/courses-json')
     .then(response => response.json())
     .then(courses => {
       const container = document.getElementById('courses-container');
@@ -41,6 +42,11 @@
       container.innerHTML = ''; // varsa önce içeriği temizle
 
       courses.forEach(course => {
+        // enroll durumuna göre buton stili ve yazısı
+        const isEnrolled = course.enroll === true;
+        const btnClass = isEnrolled ? 'btn btn-success w-100' : 'btn btn-outline-primary w-100';
+        const btnText = isEnrolled ? 'Kayıtlısın' : 'Derse Git';
+
         const card = `
           <div class="col-md-4">
             <div class="card course-card h-100">
@@ -50,7 +56,7 @@
                 <p class="card-text">${escapeHtml(course.description)}</p>
               </div>
               <div class="card-footer bg-white border-0">
-                <a href="lesson/${encodeURIComponent(course.id)}" class="btn btn-outline-primary w-100">Derse Git</a>
+                <a href="lesson/${encodeURIComponent(course.id)}" class="${btnClass}">${btnText}</a>
               </div>
             </div>
           </div>
@@ -76,8 +82,8 @@
     })[s]);
   }
 });
-
 </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
 </body>
