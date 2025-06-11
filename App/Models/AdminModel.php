@@ -8,16 +8,26 @@ class AdminModel
 {
     private $db;
 
+    /**
+     * Veritabanı bağlantısını başlatır.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->db = Database::getInstance()->getConnection();
     }
 
+    /**
+     * Öğretmen, öğrenci ve toplam kullanıcı sayısını getirir.
+     *
+     * @return array
+     */
     public function getUserStat()
     {
         $sql_teacher = "SELECT COUNT(*) as teacher_count FROM users WHERE role = 'teacher'";
         $sql_student = "SELECT COUNT(*) as student_count FROM users WHERE role = 'student'";
-        $sql_total = "SELECT COUNT(*) as total_count FROM users";
+        $sql_total   = "SELECT COUNT(*) as total_count   FROM users";
 
         $stmt = $this->db->prepare($sql_teacher);
         $stmt->execute();
@@ -29,14 +39,12 @@ class AdminModel
         
         $stmt = $this->db->prepare($sql_total);
         $stmt->execute();
-        $total_count = $stmt->fetch(PDO::FETCH_ASSOC);
+        $total_count   = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return [
-        'teachers' => $teacher_count,
-        'students' => $student_count,
-        'total' => $total_count,
-         ];
-        
+            'teachers' => $teacher_count,
+            'students' => $student_count,
+            'total'    => $total_count,
+        ];
     }
-
 }

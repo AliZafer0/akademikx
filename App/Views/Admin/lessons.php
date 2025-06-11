@@ -1,3 +1,6 @@
+<?php
+// Sayfa: lessons.php
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,13 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>AkademikX | Admin Panel</title>
 
-  <!-- Bootstrap 5.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet" />
-
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link href="/akademikx/public/assets/css/admin_nav.css" rel="stylesheet" />
   <link rel="stylesheet" href="/akademikx/public/assets/css/btn.css" />
@@ -75,7 +75,7 @@
       </table>
 
       <div id="paginationWrapper"></div>
-    <?php include __DIR__ . '/../partials/modals/lesson_edit_modal.php'; ?>
+      <?php include __DIR__ . '/../partials/modals/lesson_edit_modal.php'; ?>
     </div>
   </div>
 
@@ -95,19 +95,12 @@ document.addEventListener('DOMContentLoaded', () => {
     url.searchParams.append('limit', limit);
     url.searchParams.append('search', search);
 
-    console.log("API çağrısı yapılıyor:", url.toString());
-
     try {
       const response = await fetch(url);
-      console.log("Response geldi:", response);
-
       if (!response.ok) throw new Error('Network response was not ok: ' + response.status);
 
       const data = await response.json();
-      console.log("API'den gelen JSON:", data);
-
       if (data.status !== 'success') {
-        console.error('API status başarısız:', data);
         tableBody.innerHTML = '<tr><td colspan="8">Veri alınamadı, API başarısız döndü.</td></tr>';
         return;
       }
@@ -121,8 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function renderLessons(lessons) {
-    console.log("renderLessons fonksiyonuna gelen veri:", lessons);
-
     if (!lessons || lessons.length === 0) {
       tableBody.innerHTML = '<tr><td colspan="8">Kayıt bulunamadı.</td></tr>';
       return;
@@ -163,18 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function truncateDescription(desc) {
-    if (!desc) return '';
-    return desc.length > 50 ? desc.substring(0, 50) + '...' : desc;
+    return desc && desc.length > 50 ? desc.substring(0, 50) + '...' : (desc || '');
   }
 
   function escapeHtml(text) {
-    if (!text) return '';
     const div = document.createElement('div');
-    div.textContent = text;
+    div.textContent = text || '';
     return div.innerHTML;
   }
 
-  // Arama inputu ve limit select değişince verileri tekrar getir
   searchInput.addEventListener('input', () => {
     currentPage = 1;
     fetchLessons(currentPage, limitSelect.value, searchInput.value);
@@ -185,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchLessons(currentPage, limitSelect.value, searchInput.value);
   });
 
-  // İlk sayfa yüklenirken veri çek
   fetchLessons(currentPage, limitSelect.value, searchInput.value);
 });
 </script>

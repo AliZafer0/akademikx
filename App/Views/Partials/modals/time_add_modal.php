@@ -1,4 +1,6 @@
-<!-- Ders Günü & Saati Ekle Modal -->
+<?php
+// Partial: modals/schedule_add_modal.php
+?>
 <div class="modal fade" id="scheduleModal" tabindex="-1" aria-labelledby="scheduleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content shadow-lg rounded-3">

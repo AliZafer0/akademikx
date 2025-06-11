@@ -1,3 +1,6 @@
+<?php
+// Partial: modals/add_user_modal.php
+?>
 <!-- Kullanıcı Ekle Modalı -->
 <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">

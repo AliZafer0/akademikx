@@ -1,3 +1,6 @@
+<?php
+// Sayfa: about.php
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -7,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     .hero {
-      background:black;
+      background: black;
       color: white;
       padding: 4rem 1rem;
       text-align: center;
@@ -24,7 +27,6 @@
 <body>
   <?php include __DIR__ . '/../partials/navbar.php'; ?>
 
-  <!-- Hero -->
   <section class="hero">
     <div class="container">
       <h1 class="display-4">AkademikX Nedir?</h1>
@@ -32,7 +34,6 @@
     </div>
   </section>
 
-  <!-- Vizyon ve Misyon -->
   <section class="container mt-5">
     <div class="row">
       <div class="col-md-6">
@@ -46,7 +47,6 @@
     </div>
   </section>
 
-  <!-- Hizmetler -->
   <section class="container mt-5">
     <h2 class="section-title text-center">Neler Sunuyoruz?</h2>
     <div class="row text-center">
@@ -76,8 +76,6 @@
       </div>
     </div>
   </section>
-
-  
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

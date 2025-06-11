@@ -1,3 +1,7 @@
+<?php
+// Sayfa: view_lesson_document.php
+?>
+<?php include __DIR__ . '/../partials/navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -9,13 +13,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
 <body>
-  <?php include __DIR__ . '/../partials/navbar.php'; ?>
-
   <div class="container mt-5">
       <div class="document-container">
           <div class="document-box">
               <div class="document">
-                   <!-- Embed başlangıçta boş bırakılıyor, JS ile src eklenecek -->
                    <embed id="doc-embed" src="" type="application/pdf" width="100%" height="600px" />
               </div>
               <div class="description">
@@ -30,7 +31,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       const urlParts = window.location.pathname.split('/');
       const filename = urlParts[urlParts.length - 1];
-
       const basePath = '../../uploads/documents/';
 
       fetch(`/akademikx/public/file-details/${filename}`)
@@ -41,25 +41,21 @@
         .then(data => {
           const docData = data[0] || {};
 
-          // Embed src'sini ayarla
           const embedEl = document.getElementById('doc-embed');
-          if(embedEl && docData.file_url){
+          if (embedEl && docData.file_url) {
             embedEl.src = basePath + docData.file_url;
           }
 
-          // Başlık ve açıklamayı doldur
           const titleEl = document.getElementById('doc-title-header');
-          if(titleEl) titleEl.textContent = docData.title || '';
+          if (titleEl) titleEl.textContent = docData.title || '';
 
           const descEl = document.getElementById('doc-description');
-          if(descEl) descEl.textContent = docData.description || '';
+          if (descEl) descEl.textContent = docData.description || '';
 
-          // Sayfa title'ı
           document.title = `AkademikX | ${docData.title || ''}`;
         })
         .catch(err => {
           console.error(err);
-          // İstersen kullanıcıya hata mesajı göster
         });
     });
   </script>

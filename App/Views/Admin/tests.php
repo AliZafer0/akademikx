@@ -1,12 +1,12 @@
 <?php
-// Sayfa: user-manage.php
+// Sayfa: tests.php
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AkademikX | Admin Panel</title>
+    <title>AkademikX | Test Yönetimi</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
@@ -28,11 +28,11 @@
                 <option value="50">50</option>
             </select>
 
-            <input class="table-search ms-3" type="search" id="searchInput" placeholder="Kullanıcı Ara..">
+            <input class="table-search ms-3" type="search" id="searchInput" placeholder="Test Ara..">
 
-            <a href="#" class="btn header-yesil-btn ms-auto" data-bs-toggle="modal" data-bs-target="#addUserModal">Yeni Kullanıcı Ekle</a>
+            <a href="/akademikx/public/teacher/tests/create" class="btn header-yesil-btn ms-auto">Yeni Test Ekle</a>
 
-            <div class="dropdown">
+            <div class="dropdown ms-2">
                 <a href="#" class="btn header-mor-btn dropdown-toggle" data-bs-toggle="dropdown">
                     Dışa Aktar <i class="fa-solid fa-download"></i>
                 </a>
@@ -49,63 +49,63 @@
                     <tr>
                         <th><input type="checkbox" id="select-all"></th>
                         <th>ID</th>
-                        <th>Kullanıcı Adı</th>
-                        <th>Yetki</th>
-                        <th>Kayıt Tarihi</th>
-                        <th>Onay Durumu</th>
+                        <th>Başlık</th>
+                        <th>Süre (dk)</th>
+                        <th>Oluşturma Tarihi</th>
                         <th>İşlem</th>
                     </tr>
                 </thead>
-                <tbody id="userTableBody"></tbody>
+                <tbody id="testTableBody"></tbody>
             </table>
-
             <nav>
                 <ul class="pagination" id="pagination"></ul>
             </nav>
-
-            <?php include __DIR__ . '/../partials/modals/user_edit_modal.php'; ?>
-            <?php include __DIR__ . '/../partials/modals/user_add_modal.php'; ?>
         </div>
     </div>
-
-    <?php include __DIR__ . '/../partials/nav_js.php'; ?>
 
     <script>
     let currentPage = 1;
 
-    function fetchUsers() {
-        fetch(`/akademikx/public/api/admin/get-user?page=${currentPage}`)
-            .then(res => res.json())
+    function fetchTests() {
+        const limit = document.getElementById('limitSelect').value;
+        const search = encodeURIComponent(document.getElementById('searchInput').value.trim());
+        fetch(`/akademikx/public/api/admin/get-tests?page=${currentPage}&limit=${limit}&search=${search}`)
+            .then(res => {
+                if (!res.ok) throw new Error(res.status);
+                return res.json();
+            })
             .then(data => {
-                renderUsers(data);
-                renderPagination(1);
+                const tests = data.tests || data;
+                const totalPages = data.totalPages || 1;
+                renderTests(tests);
+                renderPagination(totalPages);
+            })
+            .catch(err => {
+                console.error(err);
+                const tbody = document.getElementById('testTableBody');
+                tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger">Veri yüklenemedi.</td></tr>';
             });
     }
 
-    function renderUsers(users) {
-        const tbody = document.getElementById('userTableBody');
-        tbody.innerHTML = '';
-        users.forEach(user => {
-            const tr = document.createElement('tr');
-            tr.innerHTML = `
-                <td><input type="checkbox" class="user-checkbox"></td>
-                <td>${user.id}</td>
-                <td>${user.username}</td>
-                <td>${user.role}</td>
-                <td>${user.created_at}</td>
-                <td>${user.approved == '1' ? '<span class="statu-aktif">Onaylandı</span>' : '<span class="statu-pasif">Onaylanmadı</span>'}</td>
+    function renderTests(tests) {
+        const tbody = document.getElementById('testTableBody');
+        tbody.innerHTML = tests.map(test => `
+            <tr>
+                <td><input type="checkbox" class="test-checkbox"></td>
+                <td>${test.id}</td>
+                <td>${escapeHtml(test.title)}</td>
+                <td>${test.duration ?? '-'}</td>
+                <td>${test.created_at}</td>
                 <td>
-                    <a class="btn morumsu-btn" data-bs-toggle="modal" data-bs-target="#editUserModal" 
-                       data-id="${user.id}" data-username="${user.username}" data-role="${user.role}" data-approve="${user.approved}">
-                       <i class="fa-regular fa-eye"></i>
+                    <a href="/akademikx/public/lesson/quiz_detail/${test.id}" class="btn morumsu-btn me-1">
+                        <i class="fa-regular fa-eye"></i>
                     </a>
-                    <a href="#" class="btn yesil-btn download-user"></a>
-                    <a href="#" onclick="deleteUser(${user.id})" class="btn kirmizi-btn">
-                       <i class="fas fa-trash"></i>
+                    <a href="#" onclick="deleteTest(${test.id})" class="btn kirmizi-btn">
+                        <i class="fas fa-trash"></i>
                     </a>
-                </td>`;
-            tbody.appendChild(tr);
-        });
+                </td>
+            </tr>
+        `).join('') || '<tr><td colspan="6" class="text-center">Kayıt bulunamadı.</td></tr>';
     }
 
     function renderPagination(totalPages) {
@@ -118,30 +118,39 @@
             li.addEventListener('click', e => {
                 e.preventDefault();
                 currentPage = i;
-                fetchUsers();
+                fetchTests();
             });
             pagination.appendChild(li);
         }
     }
 
-    function deleteUser(userId) {
-        if (confirm('Bu kullanıcıyı silmek istediğinize emin misiniz?')) {
-            fetch(`/akademikx/public/api/users/${userId}`, {
-                method: 'DELETE'
-            })
+    function deleteTest(testId) {
+        if (!confirm('Bu testi silmek istediğinize emin misiniz?')) return;
+        fetch(`/akademikx/public/api/tests/${testId}`, { method: 'DELETE' })
             .then(res => {
-                if (!res.ok) throw new Error("Silme başarısız");
+                if (!res.ok) throw new Error('Silme başarısız');
                 return res.json();
             })
             .then(data => {
-                alert(data.message);
-                fetchUsers();
+                alert(data.message || 'Test silindi.');
+                fetchTests();
             })
-            .catch(err => alert("Bir hata oluştu: " + err.message));
-        }
+            .catch(err => {
+                console.error(err);
+                alert('Bir hata oluştu: ' + err.message);
+            });
     }
 
-    fetchUsers();
+    function escapeHtml(text) {
+        return text?.replace(/[&<>"'`=\/]/g, s => ({
+            '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',
+            "'":'&#39;','`':'&#x60;','=':'&#x3D;','/':'&#x2F;'
+        })[s]) || '';
+    }
+
+    document.getElementById('limitSelect').addEventListener('change', () => { currentPage = 1; fetchTests(); });
+    document.getElementById('searchInput').addEventListener('input', () => { currentPage = 1; fetchTests(); });
+    fetchTests();
     </script>
 </body>
 </html>

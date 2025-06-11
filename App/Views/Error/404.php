@@ -62,7 +62,7 @@ body
     </style>
 </head>
 <body>
-<a href="https://varhandev.com.tr">
+<a href="/akademikx/public/">
 <div class="container">
 <div class="row">
   <div class="col-sm-12 col-md-12 mt-5 mb-5">

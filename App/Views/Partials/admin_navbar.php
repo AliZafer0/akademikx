@@ -22,6 +22,7 @@
         <a href="/akademikx/public/admin/lessons/add_lessons" class="text-decoration-none rounded"><li>Ders Ekle</li></a>
         <a href="/akademikx/public/admin/lessons/add_category" class="text-decoration-none rounded"><li>Kategori Ekle</li></a>
         <a href="/akademikx/public/admin/lessons/add_teacher" class="text-decoration-none rounded"><li>Öğretmen Ekle</li></a>
+        <a href="/akademikx/public/admin/lessons/tests" class="text-decoration-none rounded"><li>Testler</li></a> 
       </ul>
     </li>
     <li class="mb-2">
@@ -69,6 +70,7 @@
         <a href="/akademikx/public/admin/lessons/add_lessons" class="text-decoration-none rounded"><li>Ders Ekle</li></a>
         <a href="/akademikx/public/admin/lessons/add_category" class="text-decoration-none rounded"><li>Kategori Ekle</li></a>
         <a href="/akademikx/public/admin/lessons/add_teacher" class="text-decoration-none rounded"><li>Öğretmen Ekle</li></a>
+        <a href="/akademikx/public/admin/lessons/tests" class="text-decoration-none rounded"><li>Testler</li></a> 
         </ul>
       </li>
       <li class="mb-2">

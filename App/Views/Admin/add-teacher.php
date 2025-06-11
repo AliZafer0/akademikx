@@ -1,3 +1,6 @@
+<?php
+// Sayfa: add-teacher.php
+?>
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -5,11 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>AkademikX | Admin Panel</title>
 
-  <!-- Bootstrap 5.3 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Font Awesome -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="/akademikx/public/assets/css/admin_nav.css" rel="stylesheet" />
@@ -42,7 +43,6 @@
     }
   </style>
 </head>
-
 <body>
   <?php include __DIR__ . '/../partials/admin_navbar.php'; ?>
 
@@ -51,13 +51,11 @@
       <div class="form-title text-center">Öğretmen Ekle</div>
 
       <div class="row mb-3">
-        <!-- Kullanıcı Adı -->
         <div class="col-md-5">
           <label for="username" class="form-label">Kullanıcı Adı</label>
           <input type="text" class="form-control" id="username" name="username" required>
         </div>
 
-        <!-- Şifre + Göz Butonu -->
         <div class="col-md-5">
           <label for="password" class="form-label">Şifre</label>
           <div class="input-group">
@@ -66,13 +64,11 @@
           </div>
         </div>
 
-        <!-- Şifre Oluştur -->
         <div class="col-md-2 d-flex align-items-end">
           <button type="button" class="btn header-mor-btn w-100" onclick="generatePassword()">Oluştur</button>
         </div>
       </div>
 
-      <!-- Onay Durumu -->
       <div class="row mb-3">
         <div class="col-md-12">
           <label for="status" class="form-label">Onay Durumu</label>
@@ -83,12 +79,10 @@
         </div>
       </div>
 
-      <!-- Kaydet Butonu -->
       <button type="submit" class="btn header-yesil-btn btn-save">Kaydet</button>
     </form>
   </div>
 
-  <!-- Kayıt Başarılı Modal -->
   <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content text-center">
@@ -106,9 +100,6 @@
     </div>
   </div>
 
-  <!-- SCRIPT BLOKLARI -->
-
-  <!-- 🔐 Otomatik Şifre Oluşturucu -->
   <script>
     function generatePassword(length = 10) {
       const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*";
@@ -119,9 +110,8 @@
       document.getElementById("password").value = password;
     }
   </script>
-    <?php include __DIR__ . '/../partials/nav_js.php'; ?>
+  <?php include __DIR__ . '/../partials/nav_js.php'; ?>
 
-  <!-- 👁️ Şifreyi Göster/Gizle Butonu -->
   <script>
     document.getElementById("togglePassword").addEventListener("click", function () {
       const passwordInput = document.getElementById("password");
@@ -131,8 +121,7 @@
     });
   </script>
 
-  <!-- ✅ Modal Gösterme ve Kopyalama Fonksiyonu -->
-  <?php if ($_GET['showModal']): ?>
+  <?php if (isset($_GET['showModal'])): ?>
   <script>
     window.addEventListener("DOMContentLoaded", function () {
       var successModal = new bootstrap.Modal(document.getElementById('successModal'));
@@ -143,7 +132,7 @@
       const username = document.getElementById("teacherUsername").innerText;
       const password = document.getElementById("teacherPassword").innerText;
       const textToCopy = `Kullanıcı Adı: ${username}\nŞifre: ${password}`;
-      
+
       navigator.clipboard.writeText(textToCopy).then(() => {
         document.getElementById("copyStatus").innerText = "Bilgiler panoya kopyalandı!";
       }).catch(() => {

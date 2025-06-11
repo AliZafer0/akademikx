@@ -1,3 +1,6 @@
+<?php
+// Partial: modals/upload_video_modal.php
+?>
 <!-- Dosya Yükleme Modalı -->
 <div class="modal fade" id="uploadVideoModal" tabindex="-1" aria-labelledby="uploadVideoModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -9,23 +12,18 @@
       <div class="modal-body">
         <form id="uploadVideoForm" action="../../api/add-media" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="type" value="video">
-<input type="hidden" id="lessonIdInput" name="lesson_id" value="<?= htmlspecialchars(\App\Helpers\AuthHelper::getLastUrlSegment(), ENT_QUOTES, 'UTF-8') ?>" />
+          <input type="hidden" id="lessonIdInput" name="lesson_id" value="<?= htmlspecialchars(\App\Helpers\AuthHelper::getLastUrlSegment(), ENT_QUOTES, 'UTF-8') ?>" />
 
-
-
-          <!-- Başlık -->
           <div class="mb-3">
             <label for="titleInput" class="form-label">Başlık</label>
             <input type="text" class="form-control" id="titleInput" name="title" placeholder="İçeriğin başlığı" required>
           </div>
 
-          <!-- Açıklama -->
           <div class="mb-3">
             <label for="descriptionInput" class="form-label">Açıklama</label>
             <textarea class="form-control" id="descriptionInput" name="description" rows="3" placeholder="İçeriğe kısa bir açıklama ekleyin..." required></textarea>
           </div>
 
-          <!-- Dosya Seçimi -->
           <div class="mb-3">
             <label for="fileInput" class="form-label">Dosya Seç</label>
             <input class="form-control" type="file" id="fileInput" name="uploadVideo_file" accept="video/*" required>
